@@ -17,16 +17,16 @@
     when: ansible_distribution == "Ubuntu"
 
   - name: install httpd
-    dnf:
+    yum:
       name: httpd
       state: latest
     when: ansible_distribution == "CentOS"
   - name: update packages
-    dnf:
+    yum:
       update_cache: yes
     when: ansible_distribution == "CentOS"
   - name: add php support for httpd
-    dnf:
-      name: libapache2-mod-php
+    yum:
+      name: php
       state: latest
     when: ansible_distribution == "CentOS"
