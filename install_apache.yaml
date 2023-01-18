@@ -5,13 +5,28 @@
     apt:
       name: apache2
       state: latest
-    when: ansible_distribution in ["Debian", "Ubuntu"] 
+    when: ansible_distribution == "Ubuntu" 
   - name: update packages
     apt:
       update_cache: yes
-    when: ansible_ditribution in ["Debian", "Ubuntu"]
+    when: ansible_distribution == "Ubuntu"
   - name: add php support for apache
     apt:
       name: libapache2-mod-php
       state: latest
-    when: ansible_distribution in ["Debian", "Ubuntu"]
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install httpd
+    dnf:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "CentOS"
+  - name: update packages
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+  - name: add php support for httpd
+    dnf:
+      name: libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "CentOS"
