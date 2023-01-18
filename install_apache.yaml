@@ -1,32 +1,10 @@
 ---
 - hosts: all
   tasks:
-  - name: install apache
-    apt:
-      name: apache2
+  - name: install apache2 and php
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
       state: latest
-    when: ansible_distribution == "Ubuntu" 
-  - name: update packages
-    apt:
       update_cache: yes
-    when: ansible_distribution == "Ubuntu"
-  - name: add php support for apache
-    apt:
-      name: libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: install httpd
-    yum:
-      name: httpd
-      state: latest
-    when: ansible_distribution == "CentOS"
-  - name: update packages
-    yum:
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
-  - name: add php support for httpd
-    yum:
-      name: php
-      state: latest
-    when: ansible_distribution == "CentOS"
